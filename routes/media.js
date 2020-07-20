@@ -1,8 +1,8 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-router.get('/', function (req, res, next) {
-    res.send('media');
-});
+const mediaHandler = require('../handlers/media')
+
+router.post('/', mediaHandler.create);
 
 module.exports = router;
