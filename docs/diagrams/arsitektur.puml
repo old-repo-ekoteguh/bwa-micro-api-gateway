@@ -1,0 +1,46 @@
+@startuml arsitektur
+title Arsitektur BWA-MICROSERVICES
+package "FrontEnd" {
+    component [Mobile/Web\n(ReactJS)] as GUI
+}
+
+node "BackEnd API" {
+    [API Gateway\n(ExpressJS)] as API
+} 
+
+package "BackEnd - Media" {
+    component [MediaService\n(ExpressJS)] as MS
+}
+
+package "BackEnd - Member" {
+    component [MemberService\n(ExpressJS)] as US
+}
+
+package "BackEnd - Course" {
+    component [CourseService\n(LaravelPHP)] as CS
+}
+
+package "BackEnd - OrderPayment" {
+    component [OrderPaymentService\n(LaravelPHP)] as OPS
+}
+
+database "DB - Media\n(MySQL)" as DBM
+database "DB - Member\n(MySQL)" as DBU
+database "DB - Course\n(MySQL)" as DBC
+database "DB - OrderPayment\n(MySQL)" as DBOP
+
+
+GUI <--> API
+API <--> MS
+API <--> US
+API <--> CS
+API <--> OPS
+MS <--> CS
+CS <--> OPS
+
+MS <--> DBM
+US <--> DBU
+CS <--> DBC
+OPS <--> DBOP
+
+@enduml
