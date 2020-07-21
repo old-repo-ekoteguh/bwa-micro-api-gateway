@@ -8,8 +8,8 @@ const api = apiAdapter(URL_MEMBER_SERVICE);
 
 module.exports = async (req, res) => {
     try {
-        const media = await api.post('/members/register', req.body);
-        return res.json(media.data);
+        const member = await api.post('/members/register', req.body);
+        return res.json(member.data);
     } catch (error) {
         if (error.code === 'ECONNREFUSED') {
             return res.status(500).json({
